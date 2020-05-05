@@ -8,6 +8,7 @@ COPY voms-escape.cloud.cnaf.infn.it.vomses /etc/vomses/
 COPY voms-escape.cloud.cnaf.infn.it.lsc /etc/grid-security/vomsdir/
 COPY rucio.cfg.*.j2 / 
 COPY EGI-trustanchors /
+COPY initialise-user-auth /home/$NB_USER 
 
 RUN apt-get update && apt-get install -y gnupg2 vim
 RUN wget -q -O - https://dist.eugridpma.info/distribution/igtf/current/GPG-KEY-EUGridPMA-RPM-3 | apt-key add -
