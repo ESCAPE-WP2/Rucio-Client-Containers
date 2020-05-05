@@ -5,8 +5,7 @@ COPY EGI-trustanchors.repo /etc/yum.repos.d/
 COPY voms-escape.cloud.cnaf.infn.it.vomses /etc/vomses/
 COPY skatelescope.eu* /etc/vomses/
 COPY voms-escape.cloud.cnaf.infn.it.lsc /etc/grid-security/vomsdir/
-COPY rucio.cfg.j2 / 
-COPY rucio.cfg / 
+COPY rucio.cfg.*.j2 / 
 
 RUN yum clean metadata
 
