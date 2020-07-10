@@ -6,6 +6,7 @@ COPY voms-escape.cloud.cnaf.infn.it.vomses /etc/vomses/
 COPY skatelescope.eu* /etc/vomses/
 COPY voms-escape.cloud.cnaf.infn.it.lsc /etc/grid-security/vomsdir/
 COPY rucio.cfg.*.j2 / 
+COPY bashrc /root/.bashrc
 
 RUN yum clean metadata
 
