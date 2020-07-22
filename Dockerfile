@@ -1,18 +1,22 @@
 FROM rucio/rucio-clients:release-1.22.6.post1
 
-# Copy in files to identify and trust host certs/CAs
-COPY EGI-trustanchors.repo /etc/yum.repos.d/
-COPY voms-escape.cloud.cnaf.infn.it.vomses /etc/vomses/
-COPY skatelescope.eu* /etc/vomses/
-COPY voms-escape.cloud.cnaf.infn.it.lsc /etc/grid-security/vomsdir/
-COPY rucio.cfg.*.j2 / 
-COPY bashrc /root/.bashrc
+# yum repositories
+RUN curl -s -o /etc/yum.repos.d/EGI-trustanchors.repo http://repository.egi.eu/sw/production/cas/1/current/repo-files/EGI-trustanchors.repo
 
-RUN yum clean metadata
+# install packages
+RUN yum -y install ca-certificates ca-policy-egi-core
+RUN yum -y install wget vim 
 
-# Missing packages we need to enable additional VOs 
-RUN yum -y install ca-certificates vim 
-RUN yum -y install ca-policy-egi-core
+# voms setup
+RUN mkdir -p /etc/vomses \
+    && wget https://indigo-iam.github.io/escape-docs/voms-config/voms-escape.cloud.cnaf.infn.it.vomses -O /etc/vomses/voms-escape.cloud.cnaf.infn.it.vomses \
+    && mkdir -p /etc/grid-security/vomsdir/escape \
+    && wget https://indigo-iam.github.io/escape-docs/voms-config/voms-escape.cloud.cnaf.infn.it.lsc -O /etc/grid-security/vomsdir/escape/voms-escape.cloud.cnaf.infn.it.lsc
 
-# Add a non-privileged user
-RUN useradd --create-home --skel /dev/null user
+COPY etc/rucio/rucio.cfg.*.j2 / 
+COPY etc/bashrc /root/.bashrc
+
+# create non-priveleged dummy user
+RUN useradd -ms /bin/bash user
+
+ENTRYPOINT /bin/bash
