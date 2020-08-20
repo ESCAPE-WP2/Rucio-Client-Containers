@@ -15,6 +15,8 @@ RUN mkdir -p /etc/vomses \
 
 COPY etc/rucio/rucio.cfg.*.j2 / 
 COPY etc/bashrc /root/.bashrc
+COPY etc/rucio_cli.sh /etc/profile.d
+
 
 # create non-priveleged dummy user
 RUN useradd -ms /bin/bash user

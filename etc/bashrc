@@ -1,17 +1,8 @@
 #!/bin/sh
-# Authors:
-# - Vincent Garonne, <vgaronne@gmail.com>, 2018
 
-shopt -s checkwinsize
-
-if [ ! -f /opt/rucio/etc/rucio.cfg ]; then
-    echo "File rucio.cfg not found. It will generate one."
-    mkdir -p /opt/rucio/etc/
-    j2 /rucio.cfg.escape.j2 > /opt/rucio/etc/rucio.cfg
-fi
-
-echo "Enable shell completion on the rucio commands"
-eval "$(register-python-argcomplete rucio)"
-eval "$(register-python-argcomplete rucio-admin)"
+# Making user owner of rucio/etc so that we can run the init
+# as user, making it easier to port to Singularity
+mkdir -p /opt/rucio/etc/
+chown -R user:user /opt/rucio/etc/
 
 su - user; exit
