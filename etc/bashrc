@@ -5,4 +5,4 @@
 mkdir -p /opt/rucio/etc/
 chown -R user:user /opt/rucio/etc/
 
-su - user; exit
+su user; exit
