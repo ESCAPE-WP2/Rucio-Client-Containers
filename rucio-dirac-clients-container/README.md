@@ -1,15 +1,16 @@
 # ESCAPE Docker UI
+
 ## Introduction
-This Dockerfile will build an UMD UI and also installs the Rucio clients and the Dirac client
+This Dockerfile will build an UMD UI and also installs the Rucio clients and the Dirac client.
+
 ##Installation
-1. Go into the directory called "dockerui_escape"
-2. Copy your certificate (usercert.pem) and your private key (userkey.pem) into this directory
-3. Run
+1. Copy your certificate (usercert.pem) and your private key (userkey.pem) into this directory
+2. Run
 	docker build -t docker-ui
 After a while you will see:
 >Successfully built <id>
 >Successfully tagged docker-ui:latest
-4. Run the UI by:
+3. Run the UI by:
 	docker- run -it <id> startui
 
 ## Configuration
