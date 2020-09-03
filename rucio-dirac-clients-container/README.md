@@ -3,7 +3,7 @@
 ## Introduction
 This Dockerfile will build an UMD UI and also installs the Rucio clients and the Dirac client.
 
-##Installation
+## Installation
 1. Copy your certificate (usercert.pem) and your private key (userkey.pem) into this directory
 2. Run
 	docker build -t docker-ui
