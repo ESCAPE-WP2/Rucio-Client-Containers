@@ -1,24 +1,21 @@
-FROM rucio/rucio-clients:release-1.22.6.post1
+FROM rucio/rucio-clients:release-1.23.6_py3
 
-# yum repositories
-RUN curl -s -o /etc/yum.repos.d/EGI-trustanchors.repo http://repository.egi.eu/sw/production/cas/1/current/repo-files/EGI-trustanchors.repo
+USER root
+RUN yum -y install wget
 
-# install packages
-RUN yum -y install ca-certificates ca-policy-egi-core
-RUN yum -y install wget vim 
-
-# voms setup
+# ESCAPE VOMS setup
 RUN mkdir -p /etc/vomses \
-    && wget https://indigo-iam.github.io/escape-docs/voms-config/voms-escape.cloud.cnaf.infn.it.vomses -O /etc/vomses/voms-escape.cloud.cnaf.infn.it.vomses \
-    && mkdir -p /etc/grid-security/vomsdir/escape \
+    && wget https://indigo-iam.github.io/escape-docs/voms-config/voms-escape.cloud.cnaf.infn.it.vomses -O /etc/vomses/voms-escape.cloud.cnaf.infn.it.vomses
+RUN mkdir -p /etc/grid-security/vomsdir/escape \
     && wget https://indigo-iam.github.io/escape-docs/voms-config/voms-escape.cloud.cnaf.infn.it.lsc -O /etc/grid-security/vomsdir/escape/voms-escape.cloud.cnaf.infn.it.lsc
 
-COPY etc/rucio/rucio.cfg.*.j2 / 
-COPY etc/bashrc /root/.bashrc
-COPY etc/rucio_cli.sh /etc/profile.d
+# ESCAPE Rucio setup
+ADD --chown=user:user etc/rucio/rucio.cfg.escape.j2 /opt/user/rucio.cfg.j2
 
+# can't auth with most recent version of rucio-clients? rollback to last working version (for now)
+RUN pip install --pre rucio-clients==1.23.2
 
-# create non-priveleged dummy user
-RUN useradd -ms /bin/bash user
+USER user
 
-ENTRYPOINT /bin/bash
+ENTRYPOINT ["/bin/bash"]
+
