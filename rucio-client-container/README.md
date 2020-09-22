@@ -2,10 +2,12 @@
 
 Rucio client enabled for the ESCAPE VO.
 
+Please refer to https://github.com/rucio/containers/tree/master/clients for more information.
+
 ## Build image
 
 ```bash
-$ docker build . --tag rucio-client
+$ make build
 ```
 
 ## Run with X.509 authentication
