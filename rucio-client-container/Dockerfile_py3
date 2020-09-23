@@ -1,4 +1,4 @@
-FROM rucio/rucio-clients:1.23.6_py3
+FROM rucio/rucio-clients:release-1.23.6_py3
 
 USER root
 RUN yum -y install wget
