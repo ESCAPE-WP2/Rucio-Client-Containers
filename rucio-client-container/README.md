@@ -7,7 +7,7 @@ Please refer to https://github.com/rucio/containers/tree/master/clients for more
 ## Build image
 
 ```bash
-$ make build
+$ make latest
 ```
 
 ## Run with X.509 authentication
