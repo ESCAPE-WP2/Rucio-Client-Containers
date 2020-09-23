@@ -6,4 +6,4 @@ latest:
 	@docker build . -f Dockerfile --tag rucio-client:latest
 
 python3:
-	@docker build . -f Dockerfile --tag rucio-client:python3
+	@docker build . -f Dockerfile --tag rucio-client:py3
