@@ -10,6 +10,12 @@ Please refer to https://github.com/rucio/containers/tree/master/clients for more
 $ make latest
 ```
 
+or, for the python3 client:
+
+```bash
+$ make py3
+```
+
 ## Run with X.509 authentication
 
 ### Using environment variables

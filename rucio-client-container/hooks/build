@@ -1,0 +1,7 @@
+#!/bin/bash 
+
+if [ "$DOCKER_TAG" == "latest" ]; then
+  docker build . -f $DOCKERFILE_PATH --tag rucio-client:py3
+elif [ "$DOCKER_TAG" == "py3" ]; then
+  docker build . -f $DOCKERFILE_PATH --build-arg BASEIMAGE=rucio/rucio-clients:release-1.23.6_py3 --tag $IMAGE_NAME
+fi
