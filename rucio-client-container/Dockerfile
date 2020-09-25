@@ -1,4 +1,5 @@
-FROM rucio/rucio-clients:release-1.23.6
+ARG BASEIMAGE=rucio/rucio-clients:release-1.23.6
+FROM $BASEIMAGE
 
 USER root
 
@@ -17,9 +18,6 @@ RUN mkdir -p /etc/grid-security/vomsdir/escape \
 
 # ESCAPE Rucio setup
 ADD --chown=user:user etc/rucio/rucio.cfg.escape.j2 /opt/user/rucio.cfg.j2
-
-# can't auth with most recent version of rucio-clients? rollback to last working version (for now)
-RUN pip install --pre rucio-clients==1.22.6.post1
 
 USER user
 WORKDIR /home/user
