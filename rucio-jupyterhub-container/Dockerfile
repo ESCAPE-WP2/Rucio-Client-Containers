@@ -23,5 +23,7 @@ RUN mkdir -p /etc/grid-security/vomsdir/escape \
 # Other packages
 RUN apt-get install -y vim
 
-#CMD /bin/bash
-CMD ["/rucio-jupyterlab/docker/configure.sh", "start-notebook.sh"]
+ADD etc/init.sh /
+RUN chmod o+x /init.sh
+
+CMD /init.sh
