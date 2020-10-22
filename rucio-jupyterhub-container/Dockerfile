@@ -26,4 +26,6 @@ RUN apt-get install -y vim
 ADD etc/init.sh /
 RUN chmod o+x /init.sh
 
+ADD etc/rucio.cfg /opt/rucio/etc/
+
 CMD /init.sh

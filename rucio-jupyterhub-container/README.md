@@ -1,6 +1,7 @@
 # rucio-jupyterhub-container
 
 Rucio jupyterhub extension enabled for the ESCAPE VO.
+https://hub.docker.com/r/projectescape/rucio-jupyterhub
 
 ## Build image
 
