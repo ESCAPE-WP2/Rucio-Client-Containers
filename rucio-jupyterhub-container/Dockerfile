@@ -27,5 +27,6 @@ ADD etc/init.sh /
 RUN chmod o+x /init.sh
 
 ADD etc/rucio.cfg /opt/rucio/etc/
+ADD etc/createProxyFromP12.sh /home/${NB_USER}
 
 CMD /init.sh
