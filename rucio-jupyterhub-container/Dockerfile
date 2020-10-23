@@ -26,7 +26,8 @@ RUN apt-get install -y vim
 ADD etc/init.sh /
 RUN chmod o+x /init.sh
 
-ADD etc/rucio.cfg /opt/rucio/etc/
+ADD etc/rucio.cfg.j2 /
+RUN fix-permissions /opt/rucio/etc/
 ADD etc/createProxyFromP12.sh /home/${NB_USER}
 
 CMD /init.sh
