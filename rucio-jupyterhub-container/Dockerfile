@@ -2,7 +2,7 @@ FROM rucio/jupyterlab
 
 USER root
 
-RUN apt-get install -y wget curl gnupg
+RUN apt-get update -y && apt-get install -y wget curl gnupg vim
 
 # EGI trust anchors
 RUN wget -q -O - \
@@ -10,9 +10,10 @@ RUN wget -q -O - \
     | apt-key add -
 
 RUN echo "deb http://repository.egi.eu/sw/production/cas/1/current egi-igtf core" >> /etc/apt/sources.list 
-RUN apt-get update
 
-RUN apt-get install -y ca-certificates ca-policy-egi-core
+RUN apt-get update -y && apt-get install -y ca-certificates ca-policy-egi-core && \
+    apt-get clean && \
+    rm -rf /var/lib/apt/lists/* /var/cache/apt/archives/*
 
 # ESCAPE VOMS setup
 RUN mkdir -p /etc/vomses \
@@ -20,15 +21,17 @@ RUN mkdir -p /etc/vomses \
 RUN mkdir -p /etc/grid-security/vomsdir/escape \
     && wget https://indigo-iam.github.io/escape-docs/voms-config/voms-escape.cloud.cnaf.infn.it.lsc -O /etc/grid-security/vomsdir/escape/voms-escape.cloud.cnaf.infn.it.lsc
 
-# Other packages
-RUN apt-get install -y vim
-
 ADD etc/init.sh /
 RUN chmod o+x /init.sh
+
+
+RUN conda install j2cli && \
+    conda clean --all -f -y
 
 ADD etc/rucio.cfg.j2 /
 RUN mkdir -p /opt/rucio/etc/
 RUN fix-permissions /opt/rucio/etc/
-ADD etc/createProxyFromP12.sh /home/${NB_USER}
+ADD etc/createProxyFromP12.sh /opt/rucio/etc/
 
+USER $NB_UID
 CMD /init.sh
