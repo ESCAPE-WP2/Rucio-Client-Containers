@@ -6,5 +6,5 @@ latest:
 	@docker build . -f Dockerfile --no-cache --tag rucio-client:latest
 
 py3:
-	@docker build . -f Dockerfile --build-arg BASEIMAGE=rucio/rucio-clients:release-1.23.6_py3 --no-cache --tag rucio-client:py3
+	@docker build . -f Dockerfile --build-arg BASEIMAGE=rucio/rucio-clients:release-1.23.8_py3 --no-cache --tag rucio-client:py3
 
