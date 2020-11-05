@@ -1,4 +1,4 @@
-ARG BASEIMAGE=rucio/rucio-clients:release-1.23.6
+ARG BASEIMAGE=rucio/rucio-clients:release-1.23.8
 FROM $BASEIMAGE
 
 USER root
