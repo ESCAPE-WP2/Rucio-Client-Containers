@@ -1,4 +1,4 @@
-ARG BASEIMAGE=rucio/rucio-clients:release-1.23.11
+ARG BASEIMAGE=rucio/rucio-clients:release-1.24.1.post1_py2
 FROM $BASEIMAGE
 
 USER root
