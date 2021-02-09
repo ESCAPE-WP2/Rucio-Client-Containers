@@ -3,7 +3,7 @@
 BASETAG=`cat BASETAG`
 
 if [ "$DOCKER_TAG" == "latest" ]; then
-  docker build . -f $DOCKERFILE_PATH --build-arg BASETAG=$BASETAG"_py2" --tag $IMAGE_NAME
-elif [ "$DOCKER_TAG" == "py3" ]; then
   docker build . -f $DOCKERFILE_PATH --build-arg BASETAG=$BASETAG --tag $IMAGE_NAME
+elif [ "$DOCKER_TAG" == "py2" ]; then
+  docker build . -f $DOCKERFILE_PATH --build-arg BASETAG=$BASETAG"_py2" --tag $IMAGE_NAME
 fi
