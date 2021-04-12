@@ -3,14 +3,15 @@
 # If cert, key files and rucio.cfg has already been generated, this script will just update your x509 proxy
 
 # Generate cert and key files (2 password prompts)
-if [ ! -f /opt/rucio/etc/client.crt ] || [ ! -f /opt/rucio/etc/client.key ]; then
-    openssl pkcs12 -in $1 -clcerts -nokeys -out /opt/rucio/etc/client.crt
-    openssl pkcs12 -in $1 -nocerts -nodes -out /opt/rucio/etc/client.key
-    chmod 0400 /opt/rucio/etc/client.crt
-    chmod 0400 /opt/rucio/etc/client.key
+if [[ ! -f /home/jovyan/client.crt ||  ! -f /home/jovyan/client.key ]]; then
+    openssl pkcs12 -in $1 -clcerts -nokeys -out /home/jovyan/client.crt
+    openssl pkcs12 -in $1 -nocerts -nodes -out /home/jovyan/client.key
+    chmod 0400 /home/jovyan/client.crt
+    chmod 0400 /home/jovyan/client.key
 fi
 # Generate short-lived x509 proxy (required for performing uploads to the data lake)
-voms-proxy-init --cert /opt/rucio/etc/client.crt --key /opt/rucio/etc/client.key --voms escape
+echo "Initializing the ESCAPE voms for your certificate"
+voms-proxy-init --cert /home/jovyan/client.crt --key /home/jovyan/client.key --voms escape
 
 # Set up Rucio config to point to the ESCAPE data lake with your account
 export RUCIO_CFG_ACCOUNT=$2
