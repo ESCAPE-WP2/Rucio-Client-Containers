@@ -11,6 +11,9 @@ RUN curl -o /etc/yum.repos.d/EGI-trustanchors.repo http://repository.egi.eu/sw/p
 RUN yum -y install wget
 RUN yum -y install ca-certificates ca-policy-egi-core
 
+# CERN cert (where is official place?)
+RUN curl -o /etc/pki/tls/certs/CERN-bundle.pem https://gitlab.cern.ch/plove/rucio/-/raw/7121c7200257a4c537b56ce6e7e438f0b35c6e48/etc/web/CERN-bundle.pem
+
 # ESCAPE VOMS setup
 RUN mkdir -p /etc/vomses \
     && wget https://indigo-iam.github.io/escape-docs/voms-config/voms-escape.cloud.cnaf.infn.it.vomses -O /etc/vomses/voms-escape.cloud.cnaf.infn.it.vomses
