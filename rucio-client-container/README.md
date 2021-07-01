@@ -4,16 +4,16 @@ Rucio client enabled for the ESCAPE VO.
 
 Please refer to https://github.com/rucio/containers/tree/master/clients for more information.
 
-## Build image
+## Build image (python 3 by default)
 
 ```bash
 $ make latest
 ```
 
-or, for the python3 client:
+or, for the python2 client:
 
 ```bash
-$ make py3
+$ make py2
 ```
 
 ## Run with X.509 authentication
