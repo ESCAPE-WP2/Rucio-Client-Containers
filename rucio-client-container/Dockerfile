@@ -24,6 +24,10 @@ RUN mkdir -p /etc/grid-security/vomsdir/escape \
 # ESCAPE Rucio setup
 ADD --chown=user:user etc/rucio/rucio.cfg.escape.j2 /opt/user/rucio.cfg.j2
 
+# install reana-client 
+RUN export LC_ALL=en_US.UTF-8
+RUN pip install reana-client
+
 USER user
 WORKDIR /home/user
 
